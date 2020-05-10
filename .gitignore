@@ -1,2 +1,3 @@
 _conf/local.config.js
 _conf/local.preferences.js
+node_modules/*

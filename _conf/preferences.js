@@ -1,5 +1,5 @@
 module.exports = {
-    serverId: '433361496802721792', // Nadeon
+    serverId: process.env.SERVERID, // Nadeon
 
     channels: {
         LU: 'line-up-informations'

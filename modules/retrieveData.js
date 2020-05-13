@@ -23,8 +23,12 @@ async function retrieveData() {
 
                     if(memberElo.length > 0) elos.push(memberElo[0]);
                     if(memberLane.length > 0) lanes.push(memberLane[0]);
+
+                    let name = member.nickname? member.nickname : member.user.username;
+                    name = name.replace(/([\*_`])/g, '\\$1');
+
                     return {
-                        name: member.nickname? member.nickname : member.user.username,
+                        name: name,
                         elo: memberElo[0] || null,
                         lane: memberLane[0] || null
                     };

@@ -33,7 +33,12 @@ Client.on('ready', () => {
 		lastRefresh: 0
 	};
 
-	App.server = Client.guilds.cache.get(App.preferences.serverId);
+	App.server = Client.guilds.cache.find(guild => guild.id == App.preferences.serverId);
+
+	if(!App.server) {
+		console.log('Cannot find the server');
+		return;
+	}
 	
 	exportObj.App = App;
 

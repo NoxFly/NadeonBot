@@ -1,10 +1,10 @@
 let {Client, App} = require('../index.js');
 
-const channel = (key, value) => {return App.server.channels.cache.find(channel => channel[key] == value);};
+const channel = (guild, key, value) => {return guild.channels.cache.find(channel => channel[key] == value);};
 
 const emoji = name => {
 	let emoji = Client.emojis.cache.get(App.preferences.emojis[name]);
-	return `<:${App.server.id}:${emoji.id}>`;
+	return `<:${App.preferences.emojiGuild}:${emoji.id}>`;
 };
 
 oIn = (obj, key) => Object.keys(obj).indexOf(key) !== -1;

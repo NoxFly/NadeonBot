@@ -1,6 +1,10 @@
 module.exports = {
     serverId: process.env.SERVERID, // Nadeon
 
+    otherGuilds: [
+        process.env.SWI
+    ],
+
     channels: {
         LU: 'line-up-informations'
     },
@@ -10,6 +14,8 @@ module.exports = {
         lanes: ['Top', 'Jungle', 'Mid', 'ADC', 'Support'],
         elo: ['Iron', 'Bronze', 'Silver', 'Gold', 'Platinum', 'Diamond', 'Master', 'Grand Master', 'Challenger']
     },
+
+    emojiGuild: process.env.emojiGuild,
 
     // emoji names in the server
     emojis: {

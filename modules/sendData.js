@@ -5,25 +5,31 @@ async function sendData() {
     // create "cache" as a last save of the data
     App.cache.LU = copy(App.LU);
 
-    //checkLUs();
-	let chan = channel('name', App.preferences.channels.LU);
-    if(!chan) return;
-    
-	chan.fetch().then(chan => {
-		chan.messages.fetch({limit: 100}).then(async function(messages) {
-            const filteredMessages = messages.array().filter(msg => msg.author.id == Client.user.id);
-			const message = filteredMessages[0] || null;
+    let guilds = App.preferences.otherGuilds.map(guildId => Client.guilds.cache.find(guild => guild.id == guildId));
+    guilds.push(App.server);
 
-			if(message) {
-                // need to modify it
-                modifyMessage(chan, filteredMessages);
-			} else {
-				// need to send new message
-                let content = createMessage();
-                for(msg in content) await chan.send(content[msg]);
-            }
-		});
-	});
+    guilds.forEach(guild => {
+        
+        let chan = channel(guild, 'name', App.preferences.channels.LU);
+        if(!chan) return;
+        
+        chan.fetch().then(chan => {
+            chan.messages.fetch({limit: 100}).then(async function(messages) {
+                const filteredMessages = messages.array().filter(msg => msg.author.id == Client.user.id);
+                const message = filteredMessages[0] || null;
+
+                if(message) {
+                    // need to modify it
+                    modifyMessage(chan, filteredMessages);
+                } else {
+                    // need to send new message
+                    let content = createMessage();
+                    for(msg in content) await chan.send(content[msg]);
+                }
+            });
+        });
+
+    });
 };
 
 const createMessage = () => {
